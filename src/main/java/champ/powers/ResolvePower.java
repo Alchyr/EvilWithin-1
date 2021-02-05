@@ -13,7 +13,7 @@ import com.megacrit.cardcrawl.localization.PowerStrings;
 import com.megacrit.cardcrawl.powers.AbstractPower;
 import com.megacrit.cardcrawl.powers.StrengthPower;
 import theHexaghost.HexaMod;
-import theHexaghost.util.TextureLoader;
+import downfall.util.TextureLoader;
 
 public class ResolvePower extends AbstractPower implements CloneablePowerInterface {
 
@@ -75,7 +75,7 @@ public class ResolvePower extends AbstractPower implements CloneablePowerInterfa
 
     public void equivStrCheck() {
         if (adjustStrength) {
-            int x = amount / 5;
+            int x = amount / 10;
             if (AbstractDungeon.player.hasPower(StrengthPower.POWER_ID)) {
                 owner.getPower(StrengthPower.POWER_ID).amount += x - strengthGrantedByResolve;
                 if (owner.getPower(StrengthPower.POWER_ID).amount == 0)

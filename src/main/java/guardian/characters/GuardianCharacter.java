@@ -1,6 +1,10 @@
 package guardian.characters;
 
+import com.megacrit.cardcrawl.actions.common.ApplyPowerAction;
+import com.megacrit.cardcrawl.dungeons.AbstractDungeon;
 import com.megacrit.cardcrawl.helpers.*;
+import guardian.modules.EnergyOrbGuardian;
+import guardian.powers.ModeShiftPower;
 import reskinContent.reskinContent;
 import basemod.abstracts.CustomPlayer;
 import com.badlogic.gdx.graphics.Color;
@@ -29,20 +33,27 @@ import java.util.List;
 public class GuardianCharacter extends CustomPlayer {
     public static final String NAME;
     public static final String DESCRIPTION;
+
     public static final String[] orbTextures = {
-            "guardianResources/GuardianImages/char/orb/layer1.png",
-            "guardianResources/GuardianImages/char/orb/layer2.png",
-            "guardianResources/GuardianImages/char/orb/layer3.png",
-            "guardianResources/GuardianImages/char/orb/layer4.png",
-            "guardianResources/GuardianImages/char/orb/layer5.png",
-            "guardianResources/GuardianImages/char/orb/layer6.png",
-            "guardianResources/GuardianImages/char/orb/layer1d.png",
-            "guardianResources/GuardianImages/char/orb/layer2d.png",
-            "guardianResources/GuardianImages/char/orb/layer3d.png",
-            "guardianResources/GuardianImages/char/orb/layer4d.png",
-            "guardianResources/GuardianImages/char/orb/layer5d.png"};
+            "guardianResources/GuardianImages/char/orb/1.png",
+            "guardianResources/GuardianImages/char/orb/2.png",
+            "guardianResources/GuardianImages/char/orb/3.png",
+            "guardianResources/GuardianImages/char/orb/4.png",
+            "guardianResources/GuardianImages/char/orb/5.png",
+            "guardianResources/GuardianImages/char/orb/6.png",
+            "guardianResources/GuardianImages/char/orb/7.png",
+            "guardianResources/GuardianImages/char/orb/1d.png",
+            "guardianResources/GuardianImages/char/orb/2d.png",
+            "guardianResources/GuardianImages/char/orb/3d.png",
+            "guardianResources/GuardianImages/char/orb/4d.png",
+            "guardianResources/GuardianImages/char/orb/5d.png",
+            "guardianResources/GuardianImages/char/orb/6d.png",};
+
+    public static float orbScaleFinal = 1.0f;
+
     public static final CharacterStrings charStrings;
     public static Color cardRenderColor = GuardianMod.mainGuardianColor;
+
 
     static {
         charStrings = CardCrawlGame.languagePack.getCharacterString("Guardian");
@@ -68,7 +79,8 @@ public class GuardianCharacter extends CustomPlayer {
     private boolean inShattered;
 
     public GuardianCharacter(String name, PlayerClass setClass) {
-        super(name, setClass, orbTextures, "guardianResources/GuardianImages/char/orb/vfx.png", (String)null, (String)null);
+//        super(name, setClass, orbTextures, "guardianResources/GuardianImages/char/orb/vfx.png", (String)null, (String)null);
+        super(name, setClass, new EnergyOrbGuardian(orbTextures,"guardianResources/GuardianImages/char/orb/vfx.png"), (String)null, (String)null);
 
         if(!reskinContent.guardianReskinAnimation){
         this.initializeClass(null,
@@ -132,6 +144,7 @@ public class GuardianCharacter extends CustomPlayer {
 */
 
     public void switchToDefensiveMode(){
+        orbScaleFinal = 0.7f;
         if (!inShattered) {
             if (!inDefensive) {
                 if(!reskinContent.guardianReskinAnimation){
@@ -162,7 +175,15 @@ public class GuardianCharacter extends CustomPlayer {
     }
     */
 
+    @Override
+    public void preBattlePrep() {
+        super.preBattlePrep();
+        AbstractDungeon.actionManager.addToBottom(new ApplyPowerAction(AbstractDungeon.player, AbstractDungeon.player, new ModeShiftPower(AbstractDungeon.player, AbstractDungeon.player, 20), 20));
+
+    }
+
     public void switchToOffensiveMode() {
+        orbScaleFinal = 1.0f;
         if (!inShattered) {
             if (inDefensive) {
                 if(!reskinContent.guardianReskinAnimation){
@@ -227,8 +248,7 @@ public class GuardianCharacter extends CustomPlayer {
     }
 
     public ArrayList<String> getStartingDeck() {
-        ArrayList<String> retVal = new ArrayList();
-        //TODO - Starting deck goes here
+        ArrayList<String> retVal = new ArrayList<>();
 
         retVal.add(Strike_Guardian.ID);
         retVal.add(Strike_Guardian.ID);

@@ -1,6 +1,5 @@
 package sneckomod.powers;
 
-import basemod.interfaces.CloneablePowerInterface;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.evacipated.cardcrawl.mod.stslib.powers.interfaces.NonStackablePower;
@@ -10,10 +9,10 @@ import com.megacrit.cardcrawl.localization.PowerStrings;
 import com.megacrit.cardcrawl.powers.AbstractPower;
 import com.megacrit.cardcrawl.relics.AbstractRelic;
 import com.megacrit.cardcrawl.rewards.RewardItem;
+import downfall.util.TextureLoader;
 import sneckomod.SneckoMod;
+import sneckomod.cards.Transmogrify;
 import sneckomod.util.TransmogrifyLinkedReward;
-import sneckomod.util.UpgradedUnknownReward;
-import theHexaghost.util.TextureLoader;
 
 public class TransmogrifyPower extends AbstractPower implements NonStackablePower {
 
@@ -29,7 +28,7 @@ public class TransmogrifyPower extends AbstractPower implements NonStackablePowe
     private AbstractRelic relicTransmoged;
 
     public TransmogrifyPower(AbstractRelic relic) {
-        this.name = "Transmogrifying";
+        this.name = NAME;
         this.ID = POWER_ID;
         this.owner = AbstractDungeon.player;
         this.relicTransmoged = relic;
@@ -49,7 +48,7 @@ public class TransmogrifyPower extends AbstractPower implements NonStackablePowe
 
     @Override
     public void onVictory() {
-        RewardItem original = new RewardItem(AbstractDungeon.returnRandomRelic(relicTransmoged.tier));
+        RewardItem original = new RewardItem(Transmogrify.returnTrueRandomScreenlessRelic(relicTransmoged.tier));
         TransmogrifyLinkedReward newrelic = new TransmogrifyLinkedReward(original);
         TransmogrifyLinkedReward newrelic2 = new TransmogrifyLinkedReward(newrelic, relicTransmoged);
 

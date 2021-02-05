@@ -1,10 +1,13 @@
 package guardian.cards;
 
+import automaton.FunctionHelper;
 import basemod.abstracts.CustomCard;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
+import com.megacrit.cardcrawl.actions.AbstractGameAction;
+import com.megacrit.cardcrawl.actions.common.ApplyPowerAction;
 import com.megacrit.cardcrawl.characters.AbstractPlayer;
 import com.megacrit.cardcrawl.core.CardCrawlGame;
 import com.megacrit.cardcrawl.core.Settings;
@@ -13,7 +16,10 @@ import com.megacrit.cardcrawl.helpers.ImageMaster;
 import com.megacrit.cardcrawl.monsters.AbstractMonster;
 import com.megacrit.cardcrawl.unlock.UnlockTracker;
 import guardian.GuardianMod;
+import guardian.actions.BraceAction;
 import guardian.powers.BeamBuffPower;
+import guardian.powers.ModeShiftPower;
+import guardian.relics.DefensiveModeMoreBlock;
 
 import java.util.ArrayList;
 
@@ -70,6 +76,10 @@ public abstract class AbstractGuardianCard extends CustomCard {
             }
         }
         return super.getPortraitImage();
+    }
+
+    public void whenReturnedFromStasis() {
+
     }
 
     /*
@@ -195,6 +205,14 @@ public abstract class AbstractGuardianCard extends CustomCard {
         if (this.hasTag(GuardianMod.STASISGLOW)) this.tags.remove(GuardianMod.STASISGLOW);
 
         GuardianMod.logger.info("New card played: " + this.name + " misc = " + this.misc);
+    }
+
+    public static void brace(int modeShiftValue) {
+        if (!AbstractDungeon.player.hasPower(ModeShiftPower.POWER_ID)){
+            AbstractDungeon.actionManager.addToBottom(new ApplyPowerAction(AbstractDungeon.player, AbstractDungeon.player, new ModeShiftPower(AbstractDungeon.player, AbstractDungeon.player, 20), 20));
+        }
+        AbstractDungeon.actionManager.addToBottom(new BraceAction(modeShiftValue));
+
     }
 
     public void saveGemMisc() {
@@ -463,7 +481,7 @@ public abstract class AbstractGuardianCard extends CustomCard {
     @Override
     public void render(SpriteBatch sb) {
         super.render(sb);
-        if (socketCount > 0) {
+        if (socketCount > 0 && !isFlipped) {
             Texture socketTexture = null;
             for (int i = 0; i < socketCount; i++) {
 

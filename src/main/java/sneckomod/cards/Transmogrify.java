@@ -1,17 +1,12 @@
 package sneckomod.cards;
 
-import com.badlogic.gdx.graphics.Color;
-import com.megacrit.cardcrawl.actions.common.ApplyPowerAction;
 import com.megacrit.cardcrawl.characters.AbstractPlayer;
-import com.megacrit.cardcrawl.core.Settings;
 import com.megacrit.cardcrawl.dungeons.AbstractDungeon;
 import com.megacrit.cardcrawl.helpers.RelicLibrary;
 import com.megacrit.cardcrawl.monsters.AbstractMonster;
 import com.megacrit.cardcrawl.relics.AbstractRelic;
 import com.megacrit.cardcrawl.relics.Circlet;
-import slimebound.SlimeboundMod;
 import sneckomod.powers.TransmogrifyPower;
-import sneckomod.vfx.AnnouncementEffect;
 
 import java.util.ArrayList;
 
@@ -27,9 +22,74 @@ public class Transmogrify extends AbstractSneckoCard {
         tags.add(CardTags.HEALING);
     }
 
+    public static AbstractRelic returnTrueRandomScreenlessRelic(AbstractRelic.RelicTier tier) {
+        ArrayList<AbstractRelic> eligibleRelicsList = new ArrayList<>();
+        ArrayList<AbstractRelic> myGoodStuffList = new ArrayList<>();
+        switch (tier) {
+            case DEPRECATED:
+            case STARTER:
+            case SPECIAL:
+                eligibleRelicsList.add(RelicLibrary.getRelic(Circlet.ID));
+                break;
+            case COMMON:
+                for (String r : AbstractDungeon.commonRelicPool) {
+                    eligibleRelicsList.add(RelicLibrary.getRelic(r));
+                }
+                break;
+            case UNCOMMON:
+                for (String r : AbstractDungeon.uncommonRelicPool) {
+                    eligibleRelicsList.add(RelicLibrary.getRelic(r));
+                }
+                break;
+            case RARE:
+                for (String r : AbstractDungeon.rareRelicPool) {
+                    eligibleRelicsList.add(RelicLibrary.getRelic(r));
+                }
+                break;
+            case BOSS:
+                for (String r : AbstractDungeon.bossRelicPool) {
+                    eligibleRelicsList.add(RelicLibrary.getRelic(r));
+                }
+                break;
+            case SHOP:
+                for (String r : AbstractDungeon.shopRelicPool) {
+                    eligibleRelicsList.add(RelicLibrary.getRelic(r));
+                }
+                break;
+        }
+
+        try {
+            for (AbstractRelic r : eligibleRelicsList)
+                if (r.getClass().getMethod("onEquip").getDeclaringClass() == AbstractRelic.class && r.getClass().getMethod("onUnequip").getDeclaringClass() == AbstractRelic.class) {
+                    myGoodStuffList.add(r);
+                }
+        } catch (NoSuchMethodException e) {
+            e.printStackTrace();
+        }
+        if (myGoodStuffList.isEmpty()) {
+            return new Circlet();
+        } else {
+            myGoodStuffList.removeIf(r -> AbstractDungeon.player.hasRelic(r.relicId));
+            return myGoodStuffList.get(AbstractDungeon.cardRandomRng.random(myGoodStuffList.size() - 1));
+        }
+    }
+
+    private static boolean equipCheck(AbstractRelic r) throws NoSuchMethodException {
+        //Returns true if the relic does NOT override equip or unequip effects.
+        return r.getClass().getMethod("onEquip").getDeclaringClass() == AbstractRelic.class && r.getClass().getMethod("onUnequip").getDeclaringClass() == AbstractRelic.class;
+    }
+
     public void use(AbstractPlayer p, AbstractMonster m) {
         ArrayList<AbstractRelic> eligibleRelicsList = new ArrayList<>(AbstractDungeon.player.relics);
         eligibleRelicsList.removeIf(c -> c.tier == AbstractRelic.RelicTier.STARTER || c.tier == AbstractRelic.RelicTier.SPECIAL);
+        eligibleRelicsList.removeIf(c -> {
+            try {
+                return !equipCheck(c);
+            } catch (NoSuchMethodException e) {
+                e.printStackTrace();
+                return false;
+            }
+        });
         if (!eligibleRelicsList.isEmpty()) {
             AbstractRelic q = eligibleRelicsList.get(AbstractDungeon.cardRandomRng.random(eligibleRelicsList.size() - 1));
             q.flash();
@@ -40,39 +100,21 @@ public class Transmogrify extends AbstractSneckoCard {
         }
     }
 
-
-    public static AbstractRelic returnTrueRandomScreenlessRelic(AbstractRelic.RelicTier tier) {
-        ArrayList<AbstractRelic> eligibleRelicsList = new ArrayList<>();
-        ArrayList<AbstractRelic> myGoodStuffList = new ArrayList<>();
-        if (tier == AbstractRelic.RelicTier.COMMON) {
-            for (String r : AbstractDungeon.commonRelicPool) {
-                eligibleRelicsList.add(RelicLibrary.getRelic(r));
+    @Override
+    public boolean canUse(AbstractPlayer p, AbstractMonster m) {
+        boolean newMusic = super.canUse(p, m);
+        if (p.relics.stream().anyMatch(r -> {
+            try {
+                return (r.tier != AbstractRelic.RelicTier.STARTER && r.tier != AbstractRelic.RelicTier.SPECIAL && equipCheck(r));
+            } catch (NoSuchMethodException e) {
+                e.printStackTrace();
             }
-        } else if (tier == AbstractRelic.RelicTier.UNCOMMON) {
-            for (String r : AbstractDungeon.uncommonRelicPool) {
-                eligibleRelicsList.add(RelicLibrary.getRelic(r));
-            }
-        } else if (tier == AbstractRelic.RelicTier.RARE) {
-            for (String r : AbstractDungeon.rareRelicPool) {
-                eligibleRelicsList.add(RelicLibrary.getRelic(r));
-            }
-        } else if (tier == AbstractRelic.RelicTier.SHOP) {
-            for (String r : AbstractDungeon.shopRelicPool) {
-                eligibleRelicsList.add(RelicLibrary.getRelic(r));
-            }
-        } else if (tier == AbstractRelic.RelicTier.STARTER) {
-            eligibleRelicsList.addAll(RelicLibrary.starterList);
+            return false;
+        })) {
+            return newMusic;
         }
-        SlimeboundMod.logger.info(tier);
-        SlimeboundMod.logger.info(eligibleRelicsList);
-
-        myGoodStuffList.removeIf(r -> AbstractDungeon.player.hasRelic(r.relicId));
-
-        if (myGoodStuffList.isEmpty()) {
-            return new Circlet();
-        } else {
-            return myGoodStuffList.get(AbstractDungeon.cardRandomRng.random(myGoodStuffList.size() - 1));
-        }
+        cantUseMessage = EXTENDED_DESCRIPTION[0];
+        return false;
     }
 
     public void upgrade() {

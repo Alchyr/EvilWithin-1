@@ -4,6 +4,7 @@ import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.math.MathUtils;
 import com.esotericsoftware.spine.AnimationState;
+import com.megacrit.cardcrawl.actions.AbstractGameAction;
 import com.megacrit.cardcrawl.actions.animations.VFXAction;
 import com.megacrit.cardcrawl.actions.common.*;
 import com.megacrit.cardcrawl.actions.unique.CanLoseAction;
@@ -17,13 +18,11 @@ import com.megacrit.cardcrawl.monsters.AbstractMonster;
 import com.megacrit.cardcrawl.powers.BarricadePower;
 import com.megacrit.cardcrawl.powers.NoBlockPower;
 import com.megacrit.cardcrawl.powers.StrengthPower;
-import com.megacrit.cardcrawl.rooms.AbstractRoom;
 import com.megacrit.cardcrawl.vfx.combat.SmokeBombEffect;
 import downfall.actions.ForceWaitAction;
 import downfall.actions.MerchantThrowGoldAction;
 import downfall.downfallMod;
 import downfall.powers.SoulStealPower;
-import downfall.rooms.HeartShopRoom;
 import downfall.vfx.GainSingleSoulEffect;
 import downfall.vfx.SoulStealEffect;
 
@@ -109,9 +108,6 @@ public class FleeingMerchant extends AbstractMonster {
         damage.add(new DamageInfo(this, 2));
         setHp(400);
         this.currentHealth = CURRENT_HP;
-
-
-        ESCAPED = false;
     }
 
     @Override
@@ -140,16 +136,21 @@ public class FleeingMerchant extends AbstractMonster {
         if (CURRENT_SOULS > 0) {
             this.addToBot(new ApplyPowerAction(this, this, new SoulStealPower(this, CURRENT_SOULS), CURRENT_SOULS));
         }
+        addToBot(new AbstractGameAction() {
+            @Override
+            public void update() {
+                isDone = true;
+                ESCAPED = false;
+            }
+        });
     }
 
     @Override
     public void takeTurn() {
         if (nextMove == ESCAPE) {
             CURRENT_HP = this.currentHealth;
-            if (hasPower(StrengthPower.POWER_ID)) {
-                CURRENT_STRENGTH = getPower(StrengthPower.POWER_ID).amount;
-            }
             AbstractDungeon.getCurrRoom().mugged = true;
+            FleeingMerchant.ESCAPED = true;
             this.addToBot(new CanLoseAction());
             this.addToBot(new VFXAction(new SmokeBombEffect(hb.cX, hb.cY)));
             this.addToBot(new EscapeAction(this));
@@ -195,6 +196,7 @@ public class FleeingMerchant extends AbstractMonster {
             this.addToBot((new VFXAction(new SoulStealEffect(AbstractDungeon.player.hb.cX, AbstractDungeon.player.hb.cY, this.hb.cX, this.hb.cY), 0.5F)));
 
             this.addToBot(new ApplyPowerAction(this, this, new StrengthPower(this, 1), 1));
+            CURRENT_STRENGTH += 1;
             if (AbstractDungeon.player.gold >= 15) {
                 this.addToBot(new ApplyPowerAction(this, this, new SoulStealPower(this, 15), 15));
                 CURRENT_SOULS += 15;

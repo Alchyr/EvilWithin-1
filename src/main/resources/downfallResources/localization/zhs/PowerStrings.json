@@ -16,7 +16,8 @@
   "downfall:NeowInvulnerable": {
     "NAME": "生命之神",
     "DESCRIPTIONS": [
-      "不能被击杀。当生命值降低到0时结束你的回合并撤退休息。"
+      "你每打出一张牌，它回复 #b",
+      " 点生命。"
     ]
   },
   "downfall:TransformDrawnCardsPower": {
@@ -42,19 +43,200 @@
   "downfall:PoisonResist": {
     "NAME": "抗毒",
     "DESCRIPTIONS": [
-      "中毒现在能被格挡，且在回合结束时触发并层数减半。"
-    ]
-  },
-  "downfall:InverseBias": {
-    "NAME": "恢复",
-    "DESCRIPTIONS": [
-      "每回合结束时获得2点 #y集中 。"
+      " #y中毒 将在你回合结束时触发。回合结束时，你每有 [E] ，使用并失去 #b10 层 #y中毒 。"
     ]
   },
   "downfall:NeowBuff": {
     "NAME": "涅奥的伟力",
     "DESCRIPTIONS": [
-      "回合结束是获得 #y力量 和 #y敏捷 。"
+      "回合结束时获得 #b2 点 #y力量 。"
+    ]
+  },
+  "downfall:WatcherAngryPower": {
+    "NAME": "无遏狂怒",
+    "DESCRIPTIONS": [
+      "当回合结束时，如果 #y观者 的生命不高于 #b50% 时将永久进入 #y暴怒 。 NL #y观者暴怒 造成和受到的伤害为 #b50% 而不是 #b100% 。"
+    ]
+  },
+  "downfall:NeowUnbridledRage": {
+    "NAME": "无遏狂怒",
+    "DESCRIPTIONS": [
+      "当回合结束时， #y涅奥 的生命低于 #b50% 时，她获得 #b6 点 #y力量 。 NL 每场战斗只能触发一次。"
+    ]
+  },
+  "downfall:WatcherCripplePower": {
+    "NAME": "渎神者",
+    "DESCRIPTIONS": [
+      "当 #y观者 再失去 #b",
+      " 生命后，下次她将要进入 #y神格 或打出 #y诸神之黄昏 后失去 #b4 点 #y力量 。",
+      " #y观者 下次将要进入 #y神格 或打出 #y诸神之黄昏 后失去 #b4 点 #y力量 。"
+    ]
+  },
+  "downfall:NeowBlasphemersDemise": {
+    "NAME": "渎神者",
+    "DESCRIPTIONS": [
+      "当 #y涅奥 再失去 #b",
+      " 生命后，她下回合将要强化时将不会获得 #b10 点 #y力量 。",
+      " #y涅奥 下回合将要强化时将不会获得 #b10 点 #y力量 。"
+    ]
+  },
+  "downfall:WatcherDivinityPower": {
+    "NAME": "消逝的信仰",
+    "DESCRIPTIONS": [
+      "每当你打出一张牌， #y观者 获得 #b1 层 #p真言 。 NL 每回合开始时 #y观者 失去 #b5 层 #p真言 。 NL #y观者 将不会自动退出 #y神格 。"
+    ]
+  },
+  "downfall:NeowFleetingFaith": {
+    "NAME": "消逝的信仰",
+    "DESCRIPTIONS": [
+      "每当你打出一张牌， #y涅奥 获得 #b1 层 #p真言 。 NL 每回合开始时 #y涅奥 失去 #b5 层 #p真言 。"
+    ]
+  },
+  "downfall:SilentShivTimeEaterPower": {
+    "NAME": "满包小刀",
+    "DESCRIPTIONS": [
+      "每回合你打出第一张 #b0 耗能牌时， #y静默猎手 将获得一张 #y小刀 。"
+      ]
+  },
+  "downfall:NeowBagOfKnives": {
+    "NAME": "满包小刀",
+    "DESCRIPTIONS": [
+      "每回合你打出前两张 #b0 耗能牌时， 受到 #y4 点伤害。"
+    ]
+  },
+  "downfall:SilentMirrorImagePower": {
+    "NAME": "复视",
+    "DESCRIPTIONS": [
+      "一个 #y静默猎手 的 #y残影 隐蔽了她的真实位置。攻击 #y本体或残影 则其将在本回合消失。"
+    ]
+  },
+  "downfall:NeowSeeingDouble": {
+    "NAME": "复视",
+    "DESCRIPTIONS": [
+      "每回合你对 #y涅奥 的第一张 #y攻击牌 将造成 #b0 点 伤害。"
+    ]
+  },
+  "downfall:SilentPoisonPower": {
+    "NAME": "警告：中毒",
+    "DESCRIPTIONS": [
+      "你对 #y静默猎手 的 #y中毒 有一定的 #y抗性 。"
+    ]
+  },
+  "downfall:NeowHighlyToxic": {
+    "NAME": "警告：中毒",
+    "DESCRIPTIONS": [
+      " #y涅奥 每回合给予你 #b10 层 #y中毒 。你对 #y中毒 有一定的 #y抗性 。"
+    ]
+  },
+  "downfall:DefectVoidPower": {
+    "NAME": "能量窃取",
+    "DESCRIPTIONS": [
+      "每当 #y故障机器人 生成 #y虚空 时，其将进入你的抽牌堆顶部。"
+    ]
+  },
+  "downfall:NeowEnergyThief": {
+    "NAME": "能量窃取",
+    "DESCRIPTIONS": [
+      "每当 #y涅奥 将 #r诅咒牌 加入你的抽牌堆时，她将同时加入 #b1 张 #y虚空 。"
+    ]
+  },
+  "downfall:DefectAncientConstructPower": {
+    "NAME": "先古造物",
+    "DESCRIPTIONS": [
+      "战斗开始时召唤2个 #y铜制圆球 。 NL 它的回合结束时时如果没有 #y人工制品 ，获得 1 层 #y人工制品 。"
+    ]
+  },
+  "downfall:NeowAncientConstruct": {
+    "NAME": "先古造物",
+    "DESCRIPTIONS": [
+      "每回合开始时如果没有 #y人工制品 ，获得 #b2 层 #y人工制品 。"
+    ]
+  },
+  "downfall:DefectCuriosity": {
+    "NAME": "偏差认知",
+    "DESCRIPTIONS": [
+      "每当你打出一张 #y稀有牌 ， #y故障机器人 获得 #b",
+      " 点 #y集中 。"
+    ]
+  },
+  "downfall:NeowUnbiasedCognition": {
+    "NAME": "偏差认知",
+    "DESCRIPTIONS": [
+      "每当你打出一张 #y稀有牌 ， #y涅奥 获得 #b1 点 #y力量 。"
+    ]
+  },
+  "downfall:IroncladStatusPower": {
+    "NAME": "同步",
+    "DESCRIPTIONS": [
+      "每当 #y铁甲战士 生成 #y状态牌 时，将其复制品加入你的弃牌堆。"
+    ]
+  },
+  "downfall:NeowSyncronize": {
+    "NAME": "同步",
+    "DESCRIPTIONS": [
+      " #y涅奥 将在每回合加入随机一张 #y状态牌 到你的弃牌堆。"
+    ]
+  },
+  "downfall:IroncladMushroomPower": {
+    "NAME": "掠食",
+    "DESCRIPTIONS": [
+      " #y铁甲战士 的 #y死亡收割 将不会消耗且对所有蘑菇生效。 NL 每当铁甲战士击杀一个蘑菇时，他获得 #b1 点 #y力量 并回复 #b20 点生命。"
+    ]
+  },
+  "downfall:NeowFeedingFrenzy": {
+    "NAME": "掠食",
+    "DESCRIPTIONS": [
+      " #y涅奥 回复其造成的未被格挡伤害的生命。"
+    ]
+  },
+  "downfall:IroncladFortificationPower": {
+    "NAME": "堡垒",
+    "DESCRIPTIONS": [
+      " #y铁甲战士 构筑了 #y堡垒 。每回合 #y堡垒 将给予他 #b15 点 #y格挡 。 NL 当 #y堡垒 被摧毁时， #y铁甲战士 失去 #y壁垒 以及所有 #y格挡 ，但每回合将会获得 #b5 点 #y力量 。"
+    ]
+  },
+  "downfall:NeowBastion": {
+    "NAME": "堡垒",
+    "DESCRIPTIONS": [
+      " #y涅奥 拥有 #y壁垒 且在每回合开始时获得 #b10 点 #y格挡 。"
+    ]
+  },
+  "downfall:MerchantStrengthPower": {
+    "NAME": "灵魂窃取",
+    "DESCRIPTIONS": [
+      " #y商人 仍留有本局灵魂窃取获得的 #y力量 。同时还获得了等量的 #y敏捷 。"
+    ]
+  },
+  "downfall:NeowMantra": {
+    "NAME": "真言",
+    "DESCRIPTIONS": [
+      "每当 #y涅奥 拥有 #b10 层 #y真言 时，将其转换成 #b10 点 #y力量 。"
+    ]
+  },
+  "downfall:CrowbotRitualPower": {
+    "NAME": "重编程：邪教",
+    "DESCRIPTIONS": [
+      "当 #y乌鸦机器人 的生命不高于 #b50% 时，其回合结束时失去 #b3 点生命并获得 #b",
+      " 点 #y力量 。"
+    ]
+  },
+  "downfall:NeowSeeingDoubleProduct": {
+    "NAME": "???",
+    "DESCRIPTIONS": [
+      "本回合你的下一张攻击牌对 #y涅奥 造成 #b0 点伤害。"
+    ]
+  },
+  "downfall:DamageMultiplier": {
+    "NAME": "伤害增幅",
+    "DESCRIPTIONS": [
+      "#y攻击牌 造成 #b",
+      " 倍伤害。"
+    ]
+  },
+  "downfall:CompressionMold": {
+    "NAME": "压模",
+    "DESCRIPTIONS": [
+      "升级被 #y发射 后的弹药。"
     ]
   }
 }

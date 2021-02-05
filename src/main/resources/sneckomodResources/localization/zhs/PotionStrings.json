@@ -1,6 +1,6 @@
 {
   "sneckomod:DiceRollPotion": {
-    "NAME": "很可能很强合剂",
+    "NAME": "可能很强药剂",
     "DESCRIPTIONS": [
       "造成 #b",
       "到",
@@ -11,14 +11,15 @@
     "NAME": "流动幸运",
     "DESCRIPTIONS": [
       "本回合内，卡牌上的随机数取上限值。",
-      "2个回合内，卡牌上的随机数取上限值。"
+      "在 #b",
+	  "个回合内，卡牌上的随机数取上限值。"
     ]
   },
   "sneckomod:MuddlingPotion": {
     "NAME": "尖峰苏打",
     "DESCRIPTIONS": [
-      "混淆手牌中耗能最高的 #b",
-      " 张牌。"
+      " #y混淆 手牌中耗能最高的 #b",
+      " 张牌。最高不为 #b3"
     ]
   },
   "sneckomod:OffclassReductionPotion": {

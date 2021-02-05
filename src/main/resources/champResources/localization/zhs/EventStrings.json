@@ -1,4 +1,14 @@
 {
+  "champ:ChampTalk": {
+    "NAME": "",
+    "DESCRIPTIONS": [
+      "你想拿回这条腰带？",
+      "有本事过来拿啊！"
+    ],
+    "OPTIONS": [
+      ""
+    ]
+  },
   "champ:Colosseum": {
     "NAME": "竞技场",
     "DESCRIPTIONS": [
@@ -43,7 +53,8 @@
       " #r点生命。",
       "[离开]",
       "[锁定] 需要非战术牌。",
-      "选择一张牌获得战术。"
+      "选择一张牌获得战术。",
+      "[阅读] 选择一张牌获得 #g战术 。 #r被诅咒 #r- #r傲慢。"
     ]
   },
   "champ:Gym": {
@@ -57,13 +68,13 @@
     "OPTIONS": [
       "[有氧运动] #g获得 #g",
       " #g点最大生命。",
-      "[练拳] 选择一张牌获得 #g起手式 。",
+      "[练拳] 选择一张牌获得 #g进入姿态 。",
       "[举重] #g永久获得1点力量。",
       "[离开]",
-      "选择一张牌获得防守起手。",
-      "选择一张牌获得角斗起手。",
-      "选择一张牌获得狂战起手。",
-      "[锁定] 需要一张起手式牌。"
+      "选择一张牌获得进入防守。",
+      "选择一张牌获得进入角斗。",
+      "选择一张牌获得进入狂战。",
+      "[锁定] 需要一张进入姿态的牌。"
     ]
   },
   "champ:MinorLeagueArena": {
@@ -82,11 +93,11 @@
   "champ:BackToBasics": {
     "NAME": "",
     "DESCRIPTIONS": [
-      "The best solution is often the simplest one."
+      "最好的解决办法往往是最简单的。"
     ],
     "OPTIONS": [
-      "[Intuition] #gAdd #gTechnique to all #gStrikes and #gDefends.",
-      "[Locked] Requires a Strike or Defend."
+      "[直觉] #g将所有打击和防御加上技术",
+      "[锁定] 需要打击和防御"
     ]
   }
 }

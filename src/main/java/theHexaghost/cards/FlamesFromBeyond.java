@@ -1,8 +1,12 @@
 package theHexaghost.cards;
 
+import com.megacrit.cardcrawl.actions.common.ApplyPowerAction;
 import com.megacrit.cardcrawl.characters.AbstractPlayer;
+import com.megacrit.cardcrawl.dungeons.AbstractDungeon;
 import com.megacrit.cardcrawl.monsters.AbstractMonster;
+import theHexaghost.HexaMod;
 import theHexaghost.powers.ApplyBurnAtTurnStartOncePower;
+import theHexaghost.powers.BurnPower;
 
 public class FlamesFromBeyond extends AbstractHexaCard {
 
@@ -14,9 +18,10 @@ public class FlamesFromBeyond extends AbstractHexaCard {
     private static final int UPG_MAGIC = 6;
 
     public FlamesFromBeyond() {
-        super(ID, -2, CardType.SKILL, CardRarity.UNCOMMON, CardTarget.ENEMY);
+        super(ID, -2, CardType.SKILL, CardRarity.COMMON, CardTarget.NONE);
         baseBurn = burn = MAGIC;
         isEthereal = true;
+        tags.add(HexaMod.AFTERLIFE);
     }
 
     @Override
@@ -30,7 +35,9 @@ public class FlamesFromBeyond extends AbstractHexaCard {
 
     @Override
     public void triggerOnExhaust() {
-        applyToSelf(new ApplyBurnAtTurnStartOncePower(burn));
+        for (AbstractMonster m : AbstractDungeon.getCurrRoom().monsters.monsters) {
+            burn(m, burn);
+        }
     }
 
     public void upgrade() {

@@ -18,7 +18,7 @@ import theHexaghost.HexaMod;
 import theHexaghost.TheHexaghost;
 import theHexaghost.actions.GreenFlameAction;
 import theHexaghost.util.OnChargeSubscriber;
-import theHexaghost.util.TextureLoader;
+import downfall.util.TextureLoader;
 import theHexaghost.vfx.MyOrb;
 
 import static theHexaghost.GhostflameHelper.activeGhostFlame;
@@ -220,7 +220,7 @@ public abstract class AbstractGhostflame {
                 sb.draw(b, x, y, 0, 0, b.getWidth(), b.getHeight(), Settings.scale, Settings.scale, 0, 0, 0, b.getWidth(), b.getHeight(), false, false);
 
                 if (animAlphaBySlot[i] > 0F) {
-                    //SlimeboundMod.logger.info("Anim alpha slot " + i + " animating: " + animAlphaBySlot[i]);
+                    ////SlimeboundMod.logger.info("Anim alpha slot " + i + " animating: " + animAlphaBySlot[i]);
                     if (animAlphaBySlot[i] < whiteOverlayTimer / 2F) {
                         float alpha = Interpolation.linear.apply(0F, .95F, animAlphaBySlot[i] / (whiteOverlayTimer / 2F));
                         sb.setColor(1F, 1F, 1F, alpha);

@@ -19,15 +19,15 @@ public class RapidStrikes extends AbstractChampCard {
         super(ID, 1, CardType.ATTACK, CardRarity.UNCOMMON, CardTarget.ENEMY);
         baseDamage = DAMAGE;
         tags.add(CardTags.STRIKE);
-       // tags.add(ChampMod.FINISHER);
-        this.tags.add(SneckoMod.BANNEDFORSNECKO);
+        // tags.add(ChampMod.FINISHER);
+      //  this.tags.add(SneckoMod.BANNEDFORSNECKO);
+        baseMagicNumber = magicNumber = 2;
     }
 
     public void use(AbstractPlayer p, AbstractMonster m) {
         //finisher();
         int x = AbstractDungeon.cardRandomRng.random(0, 2);
-        int q = ChampMod.techniquesThisTurn + 2;
-        if (upgraded) q += 1;
+        int q = ChampMod.techniquesThisTurn + magicNumber;
         for (int i = 0; i < q; i++) {
             AbstractGameAction.AttackEffect r = null;
             switch (x) {
@@ -43,14 +43,14 @@ public class RapidStrikes extends AbstractChampCard {
             }
             dmg(m, r);
         }
-       // finisher();
+        // finisher();
     }
 
     public void applyPowers() {
         super.applyPowers();
 
-        this.rawDescription = upgraded ? cardStrings.UPGRADE_DESCRIPTION : cardStrings.DESCRIPTION;
-        this.rawDescription = this.rawDescription + cardStrings.EXTENDED_DESCRIPTION[0] + String.valueOf(ChampMod.techniquesThisTurn + 2 + (upgraded ? 1 : 0));
+        this.rawDescription = cardStrings.DESCRIPTION;
+        this.rawDescription = this.rawDescription + cardStrings.EXTENDED_DESCRIPTION[0] + (ChampMod.techniquesThisTurn + magicNumber);
         this.rawDescription = this.rawDescription + cardStrings.EXTENDED_DESCRIPTION[2];
 
         this.initializeDescription();
@@ -62,7 +62,6 @@ public class RapidStrikes extends AbstractChampCard {
     }
 
     public void upp() {
-        rawDescription = UPGRADE_DESCRIPTION;
-        initializeDescription();
+        upgradeMagicNumber(1);
     }
 }

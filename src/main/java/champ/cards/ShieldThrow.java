@@ -6,7 +6,6 @@ import com.megacrit.cardcrawl.actions.AbstractGameAction;
 import com.megacrit.cardcrawl.characters.AbstractPlayer;
 import com.megacrit.cardcrawl.dungeons.AbstractDungeon;
 import com.megacrit.cardcrawl.monsters.AbstractMonster;
-import com.megacrit.cardcrawl.powers.NoBlockPower;
 
 public class ShieldThrow extends AbstractChampCard {
 
@@ -16,8 +15,10 @@ public class ShieldThrow extends AbstractChampCard {
 
     public ShieldThrow() {
         super(ID, 1, CardType.ATTACK, CardRarity.RARE, CardTarget.ENEMY);
-      //  tags.add(ChampMod.FINISHER);
+        //  tags.add(ChampMod.FINISHER);
         baseBlock = block = 9;
+        tags.add(ChampMod.COMBODEFENSIVE);
+        tags.add(ChampMod.COMBO);
     }
 
     public void use(AbstractPlayer p, AbstractMonster m) {
@@ -31,7 +32,7 @@ public class ShieldThrow extends AbstractChampCard {
         if (!dcombo()) {
             applyToSelf(new NoBlockNextTurnPower(1));
         }
-      //  finisher();
+        //  finisher();
     }
 
     @Override
@@ -40,9 +41,8 @@ public class ShieldThrow extends AbstractChampCard {
     }
 
     public void applyPowers() {
-        this.baseDamage = AbstractDungeon.player.currentBlock;
+        this.baseDamage = AbstractDungeon.player.currentBlock + block;
         super.applyPowers();
-        this.baseDamage = this.baseDamage + block;
         this.rawDescription = cardStrings.DESCRIPTION;
         this.rawDescription = this.rawDescription + cardStrings.UPGRADE_DESCRIPTION;
         this.initializeDescription();
@@ -54,6 +54,7 @@ public class ShieldThrow extends AbstractChampCard {
     }
 
     public void calculateCardDamage(AbstractMonster mo) {
+        baseDamage = AbstractDungeon.player.currentBlock + block;
         super.calculateCardDamage(mo);
         this.rawDescription = cardStrings.DESCRIPTION;
         this.rawDescription = this.rawDescription + cardStrings.UPGRADE_DESCRIPTION;

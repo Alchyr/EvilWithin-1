@@ -1,8 +1,8 @@
 package champ.cards;
 
 import champ.ChampMod;
+import champ.powers.BerserkerStylePower;
 import champ.powers.FocusedBerPower;
-import champ.powers.FocusedDefPower;
 import com.megacrit.cardcrawl.characters.AbstractPlayer;
 import com.megacrit.cardcrawl.monsters.AbstractMonster;
 import sneckomod.SneckoMod;
@@ -14,18 +14,20 @@ public class FocusedBerserking extends AbstractChampCard {
     //stupid intellij stuff skill, self, common
 
     public FocusedBerserking() {
-        super(ID, 1, CardType.SKILL, CardRarity.UNCOMMON, CardTarget.SELF);
+        super(ID, 0, CardType.SKILL, CardRarity.UNCOMMON, CardTarget.SELF);
         tags.add(ChampMod.OPENER);
-        this.tags.add(SneckoMod.BANNEDFORSNECKO);
         this.tags.add(ChampMod.OPENERBERSERKER);
+        baseDamage = 10;
+        tags.add(ChampMod.TECHNIQUE);
     }
 
     public void use(AbstractPlayer p, AbstractMonster m) {
+        techique();
         berserkOpen();
-        applyToSelf(new FocusedBerPower(2));
+        applyToSelf(new FocusedBerPower(damage));
     }
 
     public void upp() {
-        upgradeBaseCost(0);
+        upgradeDamage(5);
     }
 }

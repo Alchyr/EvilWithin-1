@@ -37,8 +37,8 @@
   },
   "hexamod:SkipABeat": {
     "NAME": "Skip a Beat",
-    "DESCRIPTION": "hexamod:Advance. NL hexamod:Force-Ignite the next Ghostflame. NL Exhaust.",
-    "UPGRADE_DESCRIPTION": "hexamod:Advance. NL hexamod:Force-Ignite the next Ghostflame."
+    "DESCRIPTION": "hexamod:Force-Ignite the next Ghostflame. NL Exhaust.",
+    "UPGRADE_DESCRIPTION": "hexamod:Force-Ignite the next Ghostflame."
   },
   "hexamod:CatchUp": {
     "NAME": "Catch Up",
@@ -53,7 +53,7 @@
     "DESCRIPTION": "Gain !M! hexamod:Intensity."
   },
   "hexamod:HexaLevel": {
-    "NAME": "Hexa-Level",
+    "NAME": "Infernal Form",
     "DESCRIPTION": "At the start of your turn, gain !M! hexamod:Intensity.",
     "UPGRADE_DESCRIPTION": "Innate. NL At the start of your turn, gain !M! hexamod:Intensity."
   },
@@ -108,13 +108,9 @@
     "NAME": "Shield of Night",
     "DESCRIPTION": "If the hexamod:Active Ghostflame is not hexamod:Ignited, gain [E] . NL Gain !B! Block."
   },
-  "hexamod:GhostlyFlex": {
-    "NAME": "Ghostly Flex",
-    "DESCRIPTION": "Gain 2 temporary Strength and 2 temporary Dexterity for each hexamod:Ignited Ghostflame."
-  },
   "hexamod:SpectralAdrenaline": {
     "NAME": "Bright Ritual",
-    "DESCRIPTION": "Gain [E] and draw 1 card for each for each hexamod:Ignited Ghostflame, then hexamod:Extinguish them. NL Exhaust."
+    "DESCRIPTION": "Gain [E] and draw 1 card for each hexamod:Ignited Ghostflame, then hexamod:Extinguish them. NL Exhaust."
   },
   "hexamod:StepThrough": {
     "NAME": "Step Through",
@@ -156,8 +152,11 @@
   },
   "hexamod:GiftsFromTheDead": {
     "NAME": "Gifts From Beyond",
-    "DESCRIPTION": "Unplayable. NL Ethereal. hexamod:Afterlife. NL Whenever an Ethereal card is Exhausted, draw 1 card next turn.",
-    "UPGRADE_DESCRIPTION": "Unplayable. NL Ethereal. hexamod:Afterlife. NL Whenever an Ethereal card is Exhausted, gain [E] and draw 1 card next turn."
+    "DESCRIPTION": "Unplayable. NL Ethereal. hexamod:Afterlife. NL Whenever an Ethereal card is Exhausted, gain [E] next turn.",
+    "UPGRADE_DESCRIPTION": "Unplayable. NL Ethereal. hexamod:Afterlife. NL Whenever an Ethereal card is Exhausted, gain [E] and draw 1 card next turn.",
+    "EXTENDED_DESCRIPTION": [
+      "These spirits are too powerful to invoke directly."
+    ]
   },
   "hexamod:Ghostwalk": {
     "NAME": "Ghostwalk",
@@ -172,7 +171,7 @@
     "DESCRIPTION": "Ethereal. NL Gain !M! Dexterity and lose 1 Strength."
   },
   "hexamod:ParanormalForm": {
-    "NAME": "Paranormal Form",
+    "NAME": "Poltergeist",
     "DESCRIPTION": "Ethereal. NL Whenever you play an Ethereal card, deal !M! damage to a random enemy."
   },
   "hexamod:UnleashSpirits": {
@@ -227,7 +226,7 @@
   },
   "hexamod:GhostflameBarrier": {
     "NAME": "Ghostflame Wall",
-    "DESCRIPTION": "Gain !B! Block. NL Whenever you are attacked this turn, apply !M! hexamod:Soulburn to the attacker."
+    "DESCRIPTION": "Gain !B! Block. NL Whenever you are attacked this turn, apply !burny! hexamod:Soulburn to the attacker."
   },
   "hexamod:Toasty": {
     "NAME": "Toasty!",
@@ -277,7 +276,7 @@
   },
   "hexamod:FlamesFromBeyond": {
     "NAME": "Flames from Beyond",
-    "DESCRIPTION": "Unplayable. NL Ethereal, hexamod:Afterlife. NL Apply !burny! hexamod:Soulburn to ALL enemies at the start of your next turn.",
+    "DESCRIPTION": "Unplayable. NL Ethereal, hexamod:Afterlife. NL Apply !burny! hexamod:Soulburn to ALL enemies.",
     "EXTENDED_DESCRIPTION": ["It's too hot to touch!"]
   },
   "hexamod:PhantomFireball": {
@@ -303,17 +302,12 @@
   },
   "hexamod:ApocalypseNow": {
     "NAME": "Apocalypse Now",
-    "DESCRIPTION": "Ethereal. NL Lose 6 HP. NL Gain [E] [E] . NL The Inferno Ghostflame becomes hexamod:Active. NL Exhaust.",
-    "UPGRADE_DESCRIPTION": "Ethereal. NL Lose 6 HP. NL Gain [E] [E] [E] . NL The Inferno Ghostflame becomes hexamod:Active. NL Exhaust."
+    "DESCRIPTION": "Ethereal. NL Gain [E] [E] . NL The Inferno Ghostflame becomes hexamod:Active. NL Exhaust.",
+    "UPGRADE_DESCRIPTION": "Ethereal. NL Gain [E] [E] [E] . NL The Inferno Ghostflame becomes hexamod:Active. NL Exhaust."
   },
   "hexamod:DynamicBlow": {
     "NAME": "Dynamic Blow",
     "DESCRIPTION": "Ethereal. NL If the hexamod:Active Ghostflame is hexamod:Ignited, apply !burny! hexamod:Soulburn. If not, deal !D! damage."
-  },
-  "hexamod:SpiritOfFire": {
-    "NAME": "Spirit of Fire",
-    "DESCRIPTION": "Ethereal. NL Gain [E] for each hexamod:Ignited Ghostflame.",
-    "UPGRADE_DESCRIPTION": "Ethereal. NL Gain [E] for each hexamod:Ignited Ghostflame. NL Draw 1 card."
   },
   "hexamod:Again": {
     "NAME": "Again!",
@@ -357,12 +351,22 @@
     "DESCRIPTION": "Apply !burny! hexamod:Soulburn. NL The next time the target's hexamod:Soulburn detonates, it affects ALL enemies. NL Exhaust.",
     "UPGRADE_DESCRIPTION": "Apply !burny! hexamod:Soulburn. NL The next time the target's hexamod:Soulburn detonates, it affects ALL enemies."
   },
-  "hexamod:Haunted": {
-    "NAME": "Haunted",
-    "DESCRIPTION": "Ethereal. Unplayable. NL When drawn, add Ethereal to all cards in your hand."
-  },
   "hexamod:CouncilsJustice": {
     "NAME": "Council's Justice",
     "DESCRIPTION": "Ethereal. NL Deal !D! damage. NL Damage is increased by !M! for each *Apparition in your exhaust pile. NL Exhaust."
+  },
+  "hexamod:ForkedFlame": {
+    "NAME": "Forked Flame",
+    "DESCRIPTION": "Deal !D! damage. NL hexamod:Force-Ignite the previous, then the next Ghostflames.",
+    "UPGRADE_DESCRIPTION": "Deal !D! damage. NL hexamod:Force-Ignite the previous, then the *Active, then the next Ghostflames."
+  },
+  "hexamod:FlameSwitch": {
+    "NAME": "Bad Omen",
+    "DESCRIPTION": "Ethereal. NL Replace the hexamod:Active Ghostflame with a hexamod:Crushing or hexamod:Bolstering one. NL Exhaust.",
+    "UPGRADE_DESCRIPTION": "Retain. NL Replace the hexamod:Active Ghostflame with a hexamod:Crushing or hexamod:Bolstering one. NL Exhaust.",
+    "EXTENDED_DESCRIPTION": [
+      "Replace the hexamod:Active Ghostflame with a hexamod:Bolstering Ghostflame",
+      "Replace the hexamod:Active Ghostflame with a hexamod:Crushing Ghostflame"
+    ]
   }
 }

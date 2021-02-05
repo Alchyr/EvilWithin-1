@@ -1,8 +1,8 @@
 package champ.cards;
 
 import champ.ChampMod;
-import champ.powers.ResolvePower;
 import com.megacrit.cardcrawl.actions.AbstractGameAction;
+import com.megacrit.cardcrawl.actions.common.GainEnergyAction;
 import com.megacrit.cardcrawl.characters.AbstractPlayer;
 import com.megacrit.cardcrawl.monsters.AbstractMonster;
 
@@ -23,9 +23,8 @@ public class GutPunch extends AbstractChampCard {
     public GutPunch() {
         super(ID, 1, CardType.ATTACK, CardRarity.COMMON, CardTarget.ENEMY);
         baseDamage = DAMAGE;
-        baseMagicNumber = magicNumber = MAGIC;
+        baseBlock = 5;
         tags.add(ChampMod.OPENER);
-        myHpLossCost = 0;
         tags.add(ChampMod.OPENERBERSERKER);
         tags.add(ChampMod.COMBO);
         tags.add(ChampMod.COMBODEFENSIVE);
@@ -34,29 +33,20 @@ public class GutPunch extends AbstractChampCard {
     public void use(AbstractPlayer p, AbstractMonster m) {
         berserkOpen();
         dmg(m, AbstractGameAction.AttackEffect.BLUNT_LIGHT);
-        dmg(m, AbstractGameAction.AttackEffect.BLUNT_HEAVY);
-      //  fatigue(2);
+        //  fatigue(2);
         if (dcombo()) {
-           // exhaust = true;
-            fatigue(magicNumber);
+            // exhaust = true;
+            atb(new GainEnergyAction(1));
+            blck();
         }
     }
 
     public void upp() {
-        upgradeDamage(UPG_DAMAGE);
-        upgradeMagicNumber(UPG_MAGIC);
-       // myHpLossCost++;
+        upgradeDamage(3);
+        upgradeBlock(3);
+        // myHpLossCost++;
     }
 
-    @Override
-    public void applyPowers() {
-        super.applyPowers();
-        if (dcombo()){
-            myHpLossCost = magicNumber;
-        } else {
-            myHpLossCost = 0;
-        }
-    }
 
     @Override
     public void triggerOnGlowCheck() {

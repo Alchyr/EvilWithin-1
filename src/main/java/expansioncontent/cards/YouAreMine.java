@@ -21,6 +21,7 @@ public class YouAreMine extends AbstractExpansionCard {
 
     public YouAreMine() {
         super(ID, 2, CardType.SKILL, CardRarity.UNCOMMON, CardTarget.ALL_ENEMY);
+        this.setBackgroundTexture("expansioncontentResources/images/512/bg_boss_collector.png", "expansioncontentResources/images/1024/bg_boss_collector.png");
 
         tags.add(expansionContentMod.STUDY_COLLECTOR);
         tags.add(expansionContentMod.STUDY);
@@ -35,7 +36,7 @@ public class YouAreMine extends AbstractExpansionCard {
         if (!AbstractDungeon.getMonsters().areMonstersBasicallyDead()) {
             flash();
             for (AbstractMonster monster : AbstractDungeon.getMonsters().monsters) {
-                if ((!monster.isDead) && (!monster.isDying)) {
+                if ((!monster.isDead) && (!monster.isDying) && !monster.halfDead) {
                     atb(new VFXAction(new CollectorCurseEffect(monster.hb.cX, monster.hb.cY), .5F));
                     atb(new RemoveAllBlockAction(monster, p));
 

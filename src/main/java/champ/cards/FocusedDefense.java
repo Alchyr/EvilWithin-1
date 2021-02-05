@@ -13,18 +13,20 @@ public class FocusedDefense extends AbstractChampCard {
     //stupid intellij stuff skill, self, common
 
     public FocusedDefense() {
-        super(ID, 1, CardType.SKILL, CardRarity.UNCOMMON, CardTarget.SELF);
+        super(ID, 0, CardType.SKILL, CardRarity.UNCOMMON, CardTarget.SELF);
         tags.add(ChampMod.OPENER);
-        this.tags.add(SneckoMod.BANNEDFORSNECKO);
         this.tags.add(ChampMod.OPENERDEFENSIVE);
+        baseBlock = 10;
+        tags.add(ChampMod.TECHNIQUE);
     }
 
     public void use(AbstractPlayer p, AbstractMonster m) {
+        techique();
         defenseOpen();
-        applyToSelf(new FocusedDefPower(3));
+        applyToSelf(new FocusedDefPower(block));
     }
 
     public void upp() {
-        upgradeBaseCost(0);
+        upgradeBlock(5);
     }
 }
